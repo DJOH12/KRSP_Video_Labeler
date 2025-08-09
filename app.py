@@ -1,4 +1,14 @@
 import streamlit as st
+import json, os, tempfile, streamlit as st
+
+# Load Google Service Account credentials from Streamlit Secrets
+if "service_account" in st.secrets:
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".json") as tmp:
+        tmp.write(json.dumps(dict(st.secrets["service_account"])).encode())
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = tmp.name
+
+from gsheets_client import get_worksheet_and_ensure_headers
+import pandas as pd
 from schema_loader import load_schema_from_excels
 from gsheets_client import get_worksheet_and_ensure_headers
 from excel_writer import build_row
