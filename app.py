@@ -159,7 +159,7 @@ with tab_setup:
 
             st.session_state.idx = 0
             st.success("Setup saved. Switch to the **Label** tab to start.")
-            st.experimental_set_query_params(tab="label")
+            st.query_params.update(tab="label")
 
 # --------------------------------------------------------------------------------
 # 🎬 LABEL TAB
